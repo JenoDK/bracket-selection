@@ -2,12 +2,12 @@ package com.jeno;
 
 import com.intellij.openapi.editor.Editor;
 
-public class EndBracketSelection extends BracketSelectionAbstractAction {
+public class OpeningBracketSelection extends BracketSelectionAbstractAction {
 
 	@Override
 	protected void performSelection(Editor editor, int currentCursor, int openingBracketIndex, int closingBracketIndex) {
-		if (closingBracketIndex >= 0) {
-			editor.getSelectionModel().setSelection(currentCursor, closingBracketIndex);
+		if (openingBracketIndex >= 0) {
+			editor.getSelectionModel().setSelection(openingBracketIndex, currentCursor);
 		}
 	}
 

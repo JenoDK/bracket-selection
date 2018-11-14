@@ -4,8 +4,28 @@
     <vendor email="jenodekeyzer@gmail.com">Jeno</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    <h3 id="bracketselection">Bracket Selection</h3>
+
+    <p>IntelliJ IDEA plugin for selecting content between brackets.</p>
+
+    <p>There are three possibilities:</p>
+
+    <ul>
+        <li>
+            Select everything between brackets (default shortcut: <i>alt PAGE_UP</i>)<br/>
+            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_all.gif" alt="Select all" width="128"/>
+        </li>
+
+        <li>
+            Select everything from opening bracket to caret (default shortcut: <i>alt HOME</i>)<br/>
+            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_left.gif" alt="Select all left" width="128"/>
+        </li>
+
+        <li>
+            Select everything from caret to closing bracket (default shortcut: <i>alt END</i>)<br/>
+            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_right.gif" alt="Select all right" width="128"/>
+        </li>
+    </ul>
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -20,22 +40,22 @@
 
     <actions>
         <group id="BracketSelection.Plugin" text="Bracket Selection" description="Selects everything in between brackets">
-            <action id="BracketSelection.Plugin.End"
-                    class="com.jeno.EndBracketSelection"
-                    text="End Bracket Selection"
-                    description="Selects everything until the end bracket">
+            <action id="BracketSelection.Plugin.Closing"
+                    class="com.jeno.ClosingBracketSelection"
+                    text="Closing Bracket Selection"
+                    description="Selects everything until the closing bracket">
                 <keyboard-shortcut keymap="$default" first-keystroke="alt END"/>
             </action>
-            <action id="BracketSelection.Plugin.Start"
-                    class="com.jeno.StartBracketSelection"
-                    text="Start Bracket Selection"
-                    description="Selects everything from the start bracket to the cursor">
+            <action id="BracketSelection.Plugin.Opening"
+                    class="com.jeno.OpeningBracketSelection"
+                    text="Opening Bracket Selection"
+                    description="Selects everything from the opening bracket to the caret">
                 <keyboard-shortcut keymap="$default" first-keystroke="alt HOME"/>
             </action>
             <action id="BracketSelection.Plugin.All"
                     class="com.jeno.AllBracketSelection"
                     text="Complete Bracket Selection"
-                    description="Selects everything from a start to a end bracket">
+                    description="Selects everything from an opening bracket to the closing bracket">
                 <keyboard-shortcut keymap="$default" first-keystroke="alt PAGE_UP"/>
             </action>
         </group>
