@@ -1,0 +1,43 @@
+<idea-plugin>
+    <id>com.jeno.bracket-selection</id>
+    <name>Bracket Selection</name>
+    <vendor email="jenodekeyzer@gmail.com">Jeno</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <group id="BracketSelection.Plugin" text="Bracket Selection" description="Selects everything in between brackets">
+            <action id="BracketSelection.Plugin.End"
+                    class="com.jeno.EndBracketSelection"
+                    text="End Bracket Selection"
+                    description="Selects everything until the end bracket">
+                <keyboard-shortcut keymap="$default" first-keystroke="alt END"/>
+            </action>
+            <action id="BracketSelection.Plugin.Start"
+                    class="com.jeno.StartBracketSelection"
+                    text="Start Bracket Selection"
+                    description="Selects everything from the start bracket to the cursor">
+                <keyboard-shortcut keymap="$default" first-keystroke="alt HOME"/>
+            </action>
+            <action id="BracketSelection.Plugin.All"
+                    class="com.jeno.AllBracketSelection"
+                    text="Complete Bracket Selection"
+                    description="Selects everything from a start to a end bracket">
+                <keyboard-shortcut keymap="$default" first-keystroke="alt PAGE_UP"/>
+            </action>
+        </group>
+    </actions>
+</idea-plugin>
