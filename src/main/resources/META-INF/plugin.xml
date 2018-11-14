@@ -13,17 +13,17 @@
     <ul>
         <li>
             Select everything between brackets (default shortcut: <i>alt PAGE_UP</i>)<br/>
-            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_all.gif" alt="Select all" width="128"/>
+            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_all.gif" alt="Select all" width="220"/>
         </li>
 
         <li>
             Select everything from opening bracket to caret (default shortcut: <i>alt HOME</i>)<br/>
-            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_left.gif" alt="Select all left" width="128"/>
+            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_left.gif" alt="Select all left" width="220"/>
         </li>
 
         <li>
             Select everything from caret to closing bracket (default shortcut: <i>alt END</i>)<br/>
-            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_right.gif" alt="Select all right" width="128"/>
+            <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_right.gif" alt="Select all right" width="220"/>
         </li>
     </ul>
     ]]></description>
