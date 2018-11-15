@@ -25,3 +25,7 @@ patchPluginXml {
       First release.<br>
       Implements basic functionality in order to select content between brackets"""
 }
+publishPlugin {
+    username intellijPublishUsername
+    password intellijPublishPassword
+}
