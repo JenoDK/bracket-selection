@@ -1,5 +1,6 @@
 ### Bracket Selection
 IntelliJ IDEA plugin for selecting content between brackets.
+https://plugins.jetbrains.com/plugin/11322-bracket-selection
 
 There are three possibilities:
 - Select everything between brackets (default shortcut: <i>alt PAGE_UP</i>)<br/>
