@@ -1,5 +1,5 @@
 ### Bracket Selection
-IntelliJ IDEA plugin for selecting content between brackets.
+IntelliJ IDEA plugin for selecting content between brackets.<br/>
 https://plugins.jetbrains.com/plugin/11322-bracket-selection
 
 There are three possibilities:
