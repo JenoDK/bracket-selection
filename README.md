@@ -9,3 +9,11 @@ There are three possibilities:
 ![opening](documentation/select_bracket_left.gif)
 - Select everything from caret to closing bracket (default shortcut: <i>alt END</i>)<br/>
 ![closing](documentation/select_bracket_right.gif)
+
+### Contribute
+#### Setup
+```
+git clone <repo_url>
+cd <repo_dir>
+./gradlew idea
+```
