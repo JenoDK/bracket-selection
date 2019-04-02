@@ -1,37 +1,55 @@
 package com.jeno;
 
+import com.intellij.codeInsight.highlighting.BraceMatchingUtil;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.ex.EditorEx;
+import com.intellij.openapi.editor.highlighter.EditorHighlighter;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.util.TextRange;
 
 public abstract class BracketSelectionAbstractAction extends AnAction {
 
-	protected static final int LOWER_LIMIT = 1000;
-	protected static final int UPPER_LIMIT = 1000;
-
 	@Override
 	public void actionPerformed(AnActionEvent e) {
 		final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
-		final Document document = editor.getDocument();
-		int currentCursor = editor.getCaretModel().getOffset();
-		int start = currentCursor >= LOWER_LIMIT ? currentCursor - LOWER_LIMIT : 0;
-		int end = currentCursor + UPPER_LIMIT;
-		if (end >= document.getTextLength()) {
-			end = document.getTextLength() - 1;
+		final CharSequence chars = editor.getDocument().getCharsSequence();
+		final int currentCursor = editor.getCaretModel().getCurrentCaret().getSelectionStart();
+		final FileType fileType = e.getRequiredData(CommonDataKeys.VIRTUAL_FILE).getFileType();
+		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
+		final HighlighterIterator iterator = highlighter.createIterator(currentCursor);
+
+		boolean foundOne = retreatIteratorToFirstLeftBrace(iterator, chars, fileType);
+		if (foundOne) {
+			TextRange brace1Start = TextRange.create(iterator.getStart(), iterator.getEnd());
+			boolean matched = BraceMatchingUtil.matchBrace(chars, fileType, iterator, true);
+			TextRange brace2End = iterator.atEnd() ? null : TextRange.create(iterator.getStart(), iterator.getEnd());
+			if (matched) {
+				performSelection(editor, brace1Start, brace2End, currentCursor);
+			}
 		}
-		int openingBracketIndex = editor.getDocument().getText(new TextRange(start, currentCursor)).lastIndexOf((int) '(') + start + 1;
-		int textAfterCursorStart = currentCursor + 1;
-		int closingBracketIndex = editor.getDocument().getText(new TextRange(textAfterCursorStart, end)).indexOf((int) ')') + textAfterCursorStart;
-		performSelection(editor, currentCursor, openingBracketIndex, closingBracketIndex);
+	}
+
+	private boolean retreatIteratorToFirstLeftBrace(HighlighterIterator iterator, CharSequence chars, FileType fileType) {
+		if (iterator.atEnd()) {
+			return false;
+		}
+
+		if (BraceMatchingUtil.isLBraceToken(iterator, chars, fileType)) {
+			return true;
+		}
+
+		iterator.retreat();
+		return retreatIteratorToFirstLeftBrace(iterator, chars, fileType);
 	}
 
 	protected abstract void performSelection(
 			Editor editor,
-			int currentCursor,
-			int openingBracketIndex,
+			TextRange currentCursor,
+			TextRange openingBracketIndex,
 			int closingBracketIndex);
 
 }

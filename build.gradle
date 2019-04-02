@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.jeno'
-version '1.1'
+version '1.2'
 
 sourceCompatibility = 1.8
 
@@ -22,9 +22,13 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      First release.<br>
-      Implements basic functionality in order to select content between brackets"""
+      New since 1.2:<br>
+      - Internal implementation changed which allowed me to always find matching brackets (braces). Previously it would just search for the first ')'
+      - Changed default shortcut for complete bracket selection to alt + mouse1 doubleclick
+      - Removed default shortcuts for opening/closing bracket selection"""
 }
-publishPlugin {
-    token intellijPublishToken
+if (project.hasProperty('intellijPublishToken')) {
+    publishPlugin {
+        token intellijPublishToken
+    }
 }

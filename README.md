@@ -3,11 +3,11 @@ IntelliJ IDEA plugin for selecting content between brackets.<br/>
 https://plugins.jetbrains.com/plugin/11322-bracket-selection
 
 There are three possibilities:
-- Select everything between brackets (default shortcut: <i>alt PAGE_UP</i>)<br/>
+- Select everything from the first found opening brace to the matching closing brace (default mouse shortcut: <i>alt button1 doubleclick</i> or <i>hold alt -> double left click anywhere in between brackets</i> in human terms)<br/>
 ![everything](documentation/select_bracket_all.gif)
-- Select everything from opening bracket to caret (default shortcut: <i>alt HOME</i>)<br/>
+- Select everything from the first found opening brace to current cursor (not bound by default)<br/>
 ![opening](documentation/select_bracket_left.gif)
-- Select everything from caret to closing bracket (default shortcut: <i>alt END</i>)<br/>
+- Select everything from the current cursor to to the first found closing brace (not bound by default)<br/>
 ![closing](documentation/select_bracket_right.gif)
 
 ### Contribute

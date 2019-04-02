@@ -12,17 +12,17 @@
 
     <ul>
         <li>
-            Select everything between brackets (default shortcut: <i>alt PAGE_UP</i>)<br/>
+            Select everything from the first found opening brace to the matching closing brace (default mouse shortcut: <i>alt button1 doubleclick</i> or <i>hold alt -> double left click anywhere in between brackets</i> in human terms)<br/>
             <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_all.gif" alt="Select all" width="220"/>
         </li>
 
         <li>
-            Select everything from opening bracket to caret (default shortcut: <i>alt HOME</i>)<br/>
+            Select everything from the first found opening brace to current cursor (not bound by default)<br/>
             <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_left.gif" alt="Select all left" width="220"/>
         </li>
 
         <li>
-            Select everything from caret to closing bracket (default shortcut: <i>alt END</i>)<br/>
+            Select everything from the current cursor to to the first found closing brace (not bound by default)<br/>
             <img src="https://raw.githubusercontent.com/JenoDK/bracket-selection/master/documentation/select_bracket_right.gif" alt="Select all right" width="220"/>
         </li>
     </ul>
@@ -42,19 +42,17 @@
                     class="com.jeno.ClosingBracketSelection"
                     text="Closing Bracket Selection"
                     description="Selects everything until the closing bracket">
-                <keyboard-shortcut keymap="$default" first-keystroke="alt END"/>
             </action>
             <action id="BracketSelection.Plugin.Opening"
                     class="com.jeno.OpeningBracketSelection"
                     text="Opening Bracket Selection"
                     description="Selects everything from the opening bracket to the caret">
-                <keyboard-shortcut keymap="$default" first-keystroke="alt HOME"/>
             </action>
             <action id="BracketSelection.Plugin.All"
                     class="com.jeno.AllBracketSelection"
                     text="Complete Bracket Selection"
-                    description="Selects everything from an opening bracket to the closing bracket">
-                <keyboard-shortcut keymap="$default" first-keystroke="alt PAGE_UP"/>
+                    description="Selects everything from the first opening bracket found to the closing bracket">
+                <mouse-shortcut keystroke="alt button1 doubleClick" keymap="$default"/>
             </action>
         </group>
     </actions>
