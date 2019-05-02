@@ -21,6 +21,7 @@ intellij {
     version '2018.3.4'
 }
 patchPluginXml {
+    sinceBuild '172'
     changeNotes """
       New since 1.3:<br>
       - Internal implementation changed which allowed me to always find matching brackets (braces). Previously it would just search for the first ')'
