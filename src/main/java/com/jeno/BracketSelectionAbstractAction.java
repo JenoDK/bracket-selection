@@ -22,7 +22,7 @@ public abstract class BracketSelectionAbstractAction extends AnAction {
 		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
 		final HighlighterIterator iterator = highlighter.createIterator(currentCursor);
 
-		boolean foundOne = retreatIteratorToFirstLeftBrace(iterator, chars, fileType);
+		boolean foundOne = retreatIteratorToFirstLeftBrace(false, iterator, chars, fileType);
 		if (foundOne) {
 			TextRange brace1Start = TextRange.create(iterator.getStart(), iterator.getEnd());
 			boolean matched = BraceMatchingUtil.matchBrace(chars, fileType, iterator, true);
@@ -33,17 +33,35 @@ public abstract class BracketSelectionAbstractAction extends AnAction {
 		}
 	}
 
-	private boolean retreatIteratorToFirstLeftBrace(HighlighterIterator iterator, CharSequence chars, FileType fileType) {
+	/**
+	 * We want to find the ultimate left brace for the current iterator
+	 * @param encounteredRBraceToken
+	 * @param iterator
+	 * @param chars
+	 * @param fileType
+	 * @return
+	 */
+	private boolean retreatIteratorToFirstLeftBrace(boolean encounteredRBraceToken, HighlighterIterator iterator, CharSequence chars, FileType fileType) {
 		if (iterator.atEnd()) {
 			return false;
 		}
 
+		// If we encounter a right side brace we set it to true
+		if (BraceMatchingUtil.isRBraceToken(iterator, chars, fileType)) {
+			encounteredRBraceToken = true;
+		}
+
 		if (BraceMatchingUtil.isLBraceToken(iterator, chars, fileType)) {
-			return true;
+			// We encountered a right side brace before encountering a left side, so this is not the utmost left side brace yet
+			if (encounteredRBraceToken) {
+				encounteredRBraceToken = false;
+			} else {
+				return true;
+			}
 		}
 
 		iterator.retreat();
-		return retreatIteratorToFirstLeftBrace(iterator, chars, fileType);
+		return retreatIteratorToFirstLeftBrace(encounteredRBraceToken, iterator, chars, fileType);
 	}
 
 	protected abstract void performSelection(
