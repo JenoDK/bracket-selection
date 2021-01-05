@@ -33,7 +33,8 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+		<applicationService serviceImplementation="com.jeno.settings.BracketSelectionSettings"/>
+		<applicationConfigurable instance="com.jeno.settings.BracketSelectionConfigurable"/>
     </extensions>
 
     <actions>
