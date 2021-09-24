@@ -1,12 +1,12 @@
 plugins {
 	id 'java'
 	id 'idea'
-	id 'org.jetbrains.intellij' version '0.5.0'
-	id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+	id 'org.jetbrains.intellij' version '1.1.3'
+	id 'org.jetbrains.kotlin.jvm' version '1.5.31'
 }
 
 group 'com.jeno'
-version '1.6'
+version '1.6.1'
 
 sourceCompatibility = 11
 
@@ -15,19 +15,29 @@ repositories {
 }
 
 dependencies {
-	testCompile group: 'junit', name: 'junit', version: '4.12'
+	testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+intellij {
+	version = '2021.2'
 }
 
 patchPluginXml {
-	sinceBuild '172'
-	untilBuild '203.*'
-	changeNotes """
-      New since 1.6:<br>
-      - Support newer 203.* IDEA versions
-      - Fixed a bug when you tried to use the bracket selection functionality with multiple opening brackets between your ultimate opening bracket and current cursor would cause strange behavior."""
+	sinceBuild = '201'
+	untilBuild = '212.*'
+	changeNotes = """
+      <h3>1.6.1</h3>
+      <ul>
+          <li>Added a setting to include brackets in the selection</li>
+      </ul>
+      <h2>1.6</h2>
+      <ul>
+          <li>Support newer 203.* IDEA versions</li>
+          <li>Fixed a bug when you tried to use the bracket selection functionality with multiple opening brackets between your ultimate opening bracket and current cursor would cause strange behavior.</li>
+      </ul>"""
 }
 if (project.hasProperty('intellijPublishToken')) {
 	publishPlugin {
-		token intellijPublishToken
+		token = intellijPublishToken
 	}
 }
