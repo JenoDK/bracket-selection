@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.jeno'
-version '1.6.1'
+version '1.6.2'
 
 sourceCompatibility = 11
 
@@ -26,6 +26,10 @@ patchPluginXml {
 	sinceBuild = '201'
 	untilBuild = '212.*'
 	changeNotes = """
+      <h3>1.6.2</h3>
+      <ul>
+          <li>Updated compatability with newer Jetbrains products.</li>
+      </ul>
       <h3>1.6.1</h3>
       <ul>
           <li>Added a setting to include brackets in the selection</li>
