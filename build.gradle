@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.jeno'
-version '1.6.2'
+version '1.7.0'
 
 sourceCompatibility = 11
 
@@ -22,10 +22,18 @@ intellij {
 	version = '2021.2'
 }
 
+buildSearchableOptions.enabled = false
+
 patchPluginXml {
 	sinceBuild = '201'
 	untilBuild = '212.*'
 	changeNotes = """
+      <h2>1.7</h2>
+      <ul>
+          <li>Added an option to also select everything between quotes (single or double).<br/>
+          The setting to include brackets/quotes also works with this.<br/>
+          </li>
+      </ul>"
       <h3>1.6.2</h3>
       <ul>
           <li>Updated compatability with newer Jetbrains products.</li>

@@ -38,7 +38,7 @@
     </extensions>
 
     <actions>
-        <group id="BracketSelection.Plugin" text="Bracket Selection" description="Selects everything in between brackets">
+        <group id="BracketSelection.Plugin" text="Bracket Selection" description="Selects everything in between brackets/quotes">
             <action id="BracketSelection.Plugin.Closing"
                     class="com.jeno.ClosingBracketSelection"
                     text="Closing Bracket Selection"
@@ -55,6 +55,12 @@
                     description="Selects everything from the first opening bracket found to the closing bracket">
                 <mouse-shortcut keystroke="alt button1 doubleClick" keymap="$default"/>
             </action>
+			<action id="QuotesSelection.Plugin"
+					class="com.jeno.QuotesSelectionAction"
+					text="Select Between Quotes"
+					description="Selects everything between an opening and closing quote">
+				<mouse-shortcut keystroke="alt button3 doubleClick" keymap="$default"/>
+			</action>
         </group>
     </actions>
 </idea-plugin>
