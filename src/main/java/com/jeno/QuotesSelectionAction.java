@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.TextRange;
@@ -19,7 +20,7 @@ public class QuotesSelectionAction extends AnAction {
 	public void actionPerformed(AnActionEvent e) {
 		final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
 		final int currentCursor = editor.getCaretModel().getCurrentCaret().getSelectionStart();
-		final EditorHighlighter highlighter = editor.getHighlighter();
+		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
 		final HighlighterIterator iterator = highlighter.createIterator(currentCursor);
 
 		if (!iterator.atEnd()) {
