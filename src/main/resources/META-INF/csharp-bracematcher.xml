@@ -1,0 +1,5 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.braceMatcher language="C#" implementationClass="com.jeno.csharp.CSharpPairedBraceMatcher"/>
+    </extensions>
+</idea-plugin>

@@ -22,7 +22,7 @@ public abstract class BracketSelectionAbstractAction extends AnAction {
 		final EditorHighlighter highlighter = ((EditorEx) editor).getHighlighter();
 		final HighlighterIterator iterator = highlighter.createIterator(currentCursor);
 
-		boolean foundOne = retreatIteratorToFirstLeftBrace(false, iterator, chars, fileType);
+		boolean foundOne = retreatIteratorToFirstLeftBrace(currentCursor, 0, 0, iterator, chars, fileType);
 		if (foundOne) {
 			TextRange brace1Start = TextRange.create(iterator.getStart(), iterator.getEnd());
 			boolean matched = BraceMatchingUtil.matchBrace(chars, fileType, iterator, true);
@@ -35,33 +35,37 @@ public abstract class BracketSelectionAbstractAction extends AnAction {
 
 	/**
 	 * We want to find the ultimate left brace for the current iterator
-	 * @param encounteredRBraceToken
+	 *
+	 * @param currentCursor
+	 * @param RBraceCount
+	 * @param LBraceCount
 	 * @param iterator
 	 * @param chars
 	 * @param fileType
 	 * @return
 	 */
-	private boolean retreatIteratorToFirstLeftBrace(boolean encounteredRBraceToken, HighlighterIterator iterator, CharSequence chars, FileType fileType) {
+	private boolean retreatIteratorToFirstLeftBrace(int currentCursor, int RBraceCount, int LBraceCount, HighlighterIterator iterator, CharSequence chars, FileType fileType) {
 		if (iterator.atEnd()) {
 			return false;
 		}
 
 		// If we encounter a right side brace we set it to true
 		if (BraceMatchingUtil.isRBraceToken(iterator, chars, fileType)) {
-			encounteredRBraceToken = true;
+			RBraceCount++;
 		}
 
-		if (BraceMatchingUtil.isLBraceToken(iterator, chars, fileType)) {
+		boolean currentCaretIsRightBeforeLeftBrace = currentCursor == iterator.getStart() && iterator.getEnd() > currentCursor;
+		if (BraceMatchingUtil.isLBraceToken(iterator, chars, fileType) && !currentCaretIsRightBeforeLeftBrace) {
 			// We encountered a right side brace before encountering a left side, so this is not the utmost left side brace yet
-			if (encounteredRBraceToken) {
-				encounteredRBraceToken = false;
+			if (RBraceCount != LBraceCount) {
+				LBraceCount++;
 			} else {
 				return true;
 			}
 		}
 
 		iterator.retreat();
-		return retreatIteratorToFirstLeftBrace(encounteredRBraceToken, iterator, chars, fileType);
+		return retreatIteratorToFirstLeftBrace(currentCursor, RBraceCount, LBraceCount, iterator, chars, fileType);
 	}
 
 	protected abstract void performSelection(

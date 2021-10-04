@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'com.jeno'
-version '1.7.0'
+version '1.7.1'
 
 sourceCompatibility = 11
 
@@ -15,11 +15,14 @@ repositories {
 }
 
 dependencies {
-	testImplementation group: 'junit', name: 'junit', version: '4.12'
+	compileOnly(fileTree("libs"))
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+	testImplementation 'io.kotest:kotest-assertions-core:4.6.1'
 }
 
 intellij {
-	version = '2021.2'
+	version = '2021.2.1'
+	plugins = ["java"]
 }
 
 buildSearchableOptions.enabled = false
@@ -28,12 +31,17 @@ patchPluginXml {
 	sinceBuild = '201'
 	untilBuild = '212.*'
 	changeNotes = """
+      <h2>1.7.1</h2>
+      <ul>
+          <li>Added C# support for Rider IDE</li>
+          <li>Fixed an issue where it would select like this 'some code <cursor>(<selection>some code in brackets</selection>)'</li>
+      </ul>
       <h2>1.7</h2>
       <ul>
           <li>Added an option to also select everything between quotes (single or double).<br/>
           The setting to include brackets/quotes also works with this.<br/>
           </li>
-      </ul>"
+      </ul>
       <h3>1.6.2</h3>
       <ul>
           <li>Updated compatability with newer Jetbrains products.</li>
@@ -48,8 +56,17 @@ patchPluginXml {
           <li>Fixed a bug when you tried to use the bracket selection functionality with multiple opening brackets between your ultimate opening bracket and current cursor would cause strange behavior.</li>
       </ul>"""
 }
+
 if (project.hasProperty('intellijPublishToken')) {
 	publishPlugin {
 		token = intellijPublishToken
 	}
+}
+
+runPluginVerifier {
+	ideVersions = ["RD-2021.2", "IIC-2021.2", "IIU-2021.2"]
+}
+
+verifyPlugin {
+	dependsOn test
 }

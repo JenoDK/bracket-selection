@@ -17,6 +17,6 @@
   ```
 - Run 
   ```
-  ./gradlew verifyPlugin
+  ./gradlew runPluginVerifier
   ./gradlew publishPlugin
   ```
