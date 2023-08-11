@@ -7,7 +7,7 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.jetbrains.rider.ideaInterop.fileTypes.csharp.lexer.CSharpTokenType;
+import com.jetbrains.rider.ideaInterop.fileTypes.csharp.kotoparser.lexer.CSharpTokenType;
 
 public class CSharpPairedBraceMatcher implements PairedBraceMatcher {
 	@Override
